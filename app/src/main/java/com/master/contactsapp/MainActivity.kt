@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -91,6 +93,32 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
+    private fun ShowFamilyName(contact: Contact) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = contact.familyName,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.h6,
+            )
+            if (contact.isFavorite) {
+                Image(
+                    painter = painterResource(id = android.R.drawable.star_big_on),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp),
+                )
+            }
+        }
+
+    }
+
+    @Composable
     private fun NameAndSurename(contact: Contact) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -104,13 +132,7 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier
                     .fillMaxWidth(),
             )
-            Text(text = contact.familyName,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.h6,
-                modifier = Modifier
-                    .fillMaxWidth(),
-            )
+            ShowFamilyName(contact)
         }
     }
 
@@ -179,7 +201,8 @@ class MainActivity : ComponentActivity() {
                 familyName = "Doe",
                 phone = "123456789",
                 address = "New York",
-                imageRes = R.drawable.some_photo_from_internet
+                imageRes = R.drawable.some_photo_from_internet,
+                isFavorite = true
             )
         )
     }
@@ -195,7 +218,8 @@ class MainActivity : ComponentActivity() {
                 name = "John",
                 familyName = "Doe",
                 phone = "123456789",
-                address = "New York"
+                address = "New York",
+                isFavorite = false
             )
         )
     }
