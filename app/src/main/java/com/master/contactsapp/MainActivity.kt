@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontVariation.weight
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -75,7 +77,8 @@ class MainActivity : ComponentActivity() {
     fun ShowPhoto(contact: Contact) {
         val image = contact.imageRes?.let { painterResource(id = it) }
         Box(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .padding(vertical = 8.dp),
             contentAlignment = Alignment.Center
         )
         {
@@ -83,7 +86,8 @@ class MainActivity : ComponentActivity() {
                 Image(
                     modifier = Modifier
                         .size(96.dp, 48.dp)
-                        .align(Alignment.Center),
+                        .align(Alignment.Center)
+                    ,
                     painter = it,
                     contentDescription = null,
                     contentScale = ContentScale.FillBounds,
@@ -151,6 +155,31 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @Composable
+    private fun LabelAndValueRow(label: String, value: String) {
+        Row(
+            modifier =
+            Modifier
+                .wrapContentWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier
+                    .weight(0.5f)
+                    .wrapContentWidth(Alignment.End)
+
+            )
+            Text(
+                text = value,
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier
+                    .weight(0.5f)
+            )
+        }
+    }
+
 
     @Composable
     private fun DetailedContactInfo(contact: Contact) {
@@ -160,27 +189,19 @@ class MainActivity : ComponentActivity() {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = "Phone: ${contact.phone}",
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            )
-            Text(
-                text = "Address: ${contact.address}",
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            )
+            LabelAndValueRow("Phone: ", contact.phone)
+            LabelAndValueRow("Adress: ",contact.address)
+            contact.email?.let {
+                LabelAndValueRow("Email: ", it)
+            }
         }
     }
 
     @Composable
     private fun ContactInfo(contact: Contact) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             NameAndPhoto(contact)
@@ -218,8 +239,9 @@ class MainActivity : ComponentActivity() {
                 name = "John",
                 familyName = "Doe",
                 phone = "123456789",
-                address = "New York",
-                isFavorite = false
+                address = "New York dcas wafsd waedcs aedf asdc ewd sae fvsd",
+                isFavorite = false,
+                email = "sadf@asdf.d"
             )
         )
     }
