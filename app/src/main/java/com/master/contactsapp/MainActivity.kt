@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -54,12 +55,11 @@ class MainActivity : ComponentActivity() {
             contentAlignment = Alignment.Center
         )
         {
-            Image(
-                modifier = Modifier
-                    .align(Alignment.Center),
+            Icon(
+                modifier = Modifier.align(Alignment.Center),
                 painter = painterResource(id = R.drawable.circle),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(Color.Gray)
+                tint = Color.Gray
             )
             Text(
                 modifier = Modifier
