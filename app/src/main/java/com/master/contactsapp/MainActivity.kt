@@ -126,7 +126,7 @@ class MainActivity : ComponentActivity() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "${contact.name} ${contact.surname?.let { it } ?: ""}",
+                text = "${contact.name} ${contact.surname ?: ""}",
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h6,
@@ -167,6 +167,12 @@ class MainActivity : ComponentActivity() {
                     .weight(0.5f)
                     .wrapContentWidth(Alignment.End)
 
+            )
+            Text(
+                text = stringResource(id = R.string.label_value_separator),
+                style = MaterialTheme.typography.body1,
+//                modifier = Modifier
+//                    .weight(0.5f)
             )
             Text(
                 text = value,

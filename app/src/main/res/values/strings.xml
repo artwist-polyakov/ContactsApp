@@ -3,4 +3,5 @@
     <string name="phone">Телефон</string>
     <string name="address">Адрес</string>
     <string name="email">E-mail</string>
+    <string name="label_value_separator">:\u00A0</string>
 </resources>
