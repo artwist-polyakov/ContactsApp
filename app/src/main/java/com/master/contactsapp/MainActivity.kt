@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -49,14 +48,13 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun RoundInitials(contact: Contact) {
-        val initials_sb = StringBuilder()
-        initials_sb.append(contact.name.first())
-        initials_sb.append(contact.familyName.first())
+        val initialsSb = StringBuilder()
+        initialsSb.append(contact.name.first())
+        initialsSb.append(contact.familyName.first())
         Box(
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
-        )
-        {
+        ) {
             Icon(
                 modifier = Modifier.align(Alignment.Center),
                 painter = painterResource(id = R.drawable.circle),
@@ -64,9 +62,8 @@ class MainActivity : ComponentActivity() {
                 tint = Color.Gray
             )
             Text(
-                modifier = Modifier
-                    .align(Alignment.Center),
-                text = initials_sb.toString(),
+                modifier = Modifier.align(Alignment.Center),
+                text = initialsSb.toString(),
                 fontWeight = FontWeight.Bold,
             )
         }
@@ -80,12 +77,14 @@ class MainActivity : ComponentActivity() {
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
             contentAlignment = Alignment.Center
-        )
-        {
+        ) {
             image?.let {
                 Image(
                     modifier = Modifier
-                        .size(96.dp, 48.dp)
+                        .size(
+                            width = 96.dp,
+                            height = 48.dp
+                        )
                         .align(Alignment.Center),
                     painter = it,
                     contentDescription = null,
@@ -113,8 +112,7 @@ class MainActivity : ComponentActivity() {
                 Image(
                     painter = painterResource(id = android.R.drawable.star_big_on),
                     contentDescription = null,
-                    modifier = Modifier
-                        .size(24.dp),
+                    modifier = Modifier.size(24.dp),
                 )
             }
         }
@@ -132,8 +130,7 @@ class MainActivity : ComponentActivity() {
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h6,
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
             )
             ShowFamilyName(contact)
         }
@@ -157,9 +154,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun LabelAndValueRow(label: String, value: String) {
         Row(
-            modifier =
-            Modifier
-                .wrapContentWidth(),
+            modifier = Modifier.wrapContentWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
@@ -173,14 +168,11 @@ class MainActivity : ComponentActivity() {
             Text(
                 text = stringResource(id = R.string.label_value_separator),
                 style = MaterialTheme.typography.body1,
-//                modifier = Modifier
-//                    .weight(0.5f)
             )
             Text(
                 text = value,
                 style = MaterialTheme.typography.body1,
-                modifier = Modifier
-                    .weight(0.5f)
+                modifier = Modifier.weight(0.5f)
             )
         }
     }
@@ -202,7 +194,7 @@ class MainActivity : ComponentActivity() {
                 stringResource(id = R.string.address),
                 contact.address
             )
-            contact.email?.let {
+            contact.email?.let { it->
                 LabelAndValueRow(
                     stringResource(id = R.string.email),
                     it
@@ -214,8 +206,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun ContactDetails(contact: Contact) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             NameAndPhoto(contact)
