@@ -49,7 +49,9 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun RoundInitials(contact: Contact) {
-        val initials = contact.name.first().toString() + contact.familyName.first().toString()
+        val initials_sb = StringBuilder()
+        initials_sb.append(contact.name.first())
+        initials_sb.append(contact.familyName.first())
         Box(
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
@@ -64,7 +66,7 @@ class MainActivity : ComponentActivity() {
             Text(
                 modifier = Modifier
                     .align(Alignment.Center),
-                text = initials,
+                text = initials_sb.toString(),
                 fontWeight = FontWeight.Bold,
             )
         }
