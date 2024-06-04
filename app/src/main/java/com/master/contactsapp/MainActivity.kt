@@ -1,6 +1,7 @@
 package com.master.contactsapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -30,17 +31,19 @@ import com.master.contactsapp.models.Contact
 
 class MainActivity : ComponentActivity() {
 
+    val contact = Contact(
+        name = "John",
+        familyName = "Doe",
+        phone = "123456789",
+        address = "New York",
+        imageRes = R.drawable.some_photo_from_internet
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ContactDetails(
-                Contact(
-                    name = "John",
-                    familyName = "Doe",
-                    phone = "123456789",
-                    address = "New York",
-                    imageRes = R.drawable.some_photo_from_internet
-                )
+                contact
             )
         }
 
@@ -48,6 +51,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun RoundInitials(contact: Contact) {
+        val adress = System.identityHashCode(contact).toString()
+        Log.d("adress", "RoundInitials: $adress")
         val initialsSb = StringBuilder()
         initialsSb.append(contact.name.first())
         initialsSb.append(contact.familyName.first())
@@ -71,6 +76,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ShowPhoto(contact: Contact) {
+        val adress = System.identityHashCode(contact).toString()
+        Log.d("adress", "ShowPhoto: $adress")
         val image = contact.imageRes?.let { painterResource(id = it) }
         Box(
             modifier = Modifier
@@ -96,6 +103,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun ShowFamilyName(contact: Contact) {
+        val address = System.identityHashCode(contact).toString()
+        Log.d("adress", "ShowFamilyName: $address")
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -121,6 +130,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun NameAndSurename(contact: Contact) {
+        val address = System.identityHashCode(contact).toString()
+        Log.d("adress", "NameAndSurename: $address")
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -138,6 +149,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun NameAndPhoto(contact: Contact) {
+        val address = System.identityHashCode(contact).toString()
+        Log.d("adress", "NameAndPhoto: $address")
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -153,6 +166,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun LabelAndValueRow(label: String, value: String) {
+        val adress = System.identityHashCode(label).toString()
+        Log.d("adress", "LabelAndValueRow: $adress")
         Row(
             modifier = Modifier.wrapContentWidth(),
             horizontalArrangement = Arrangement.Center
@@ -180,6 +195,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun DetailedContactInfo(contact: Contact) {
+        val adress = System.identityHashCode(contact).toString()
+        Log.d("adress", "DetailedContactInfo: $adress")
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -194,7 +211,7 @@ class MainActivity : ComponentActivity() {
                 stringResource(id = R.string.address),
                 contact.address
             )
-            contact.email?.let { it->
+            contact.email?.let { it ->
                 LabelAndValueRow(
                     stringResource(id = R.string.email),
                     it
@@ -205,6 +222,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun ContactDetails(contact: Contact) {
+        val address = System.identityHashCode(contact).toString()
+        Log.d("adress", "ContactDetails: $address")
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
